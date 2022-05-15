@@ -1,12 +1,6 @@
-require("dotenv").config();
-const express = require("express");
-const morgan = require("morgan");
-const debug = require("debug")("robots:root");
+const debug = require("debug")("robots:initialize server");
 const chalk = require("chalk");
-
-const app = express();
-app.use(morgan("dev"));
-app.use(express.json());
+const app = require(".");
 
 const robots = [
   {
@@ -14,9 +8,7 @@ const robots = [
   },
 ];
 
-const port = process.env.SERVER_PORT || 5000;
-
-const initializeServer = () => {
+const initializeServer = (port) => {
   const server = app.listen(port, () => {
     debug(chalk.greenBright(`Server listening on ${port}`));
   });
