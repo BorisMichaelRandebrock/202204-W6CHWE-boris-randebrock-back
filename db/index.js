@@ -1,10 +1,11 @@
 require("dotenv").config();
-const debug = require("debug")("robots-api:db");
+const debug = require("debug")("robots:api-db");
 const chalk = require("chalk");
 const mongoose = require("mongoose");
 
 const connectDb = async (connectionString) =>
   new Promise((resolve, reject) => {
+    mongoose.set("debug", true);
     mongoose.connect(connectionString, (error) => {
       if (error) {
         debug(chalk.red("Error in DB ->", error.message));
