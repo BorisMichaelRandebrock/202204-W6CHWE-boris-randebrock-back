@@ -1,21 +1,26 @@
+const debug = require("debug")("robots:middlewares:auth");
+const chalk = require("chalk");
+
 const jwt = require("jsonwebtoken");
 
-const auth = (res, req, next) => {
+const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   try {
-    if (!authorization.includes("Bearer!")) {
+    if (!authorization.includes("Bearer ")) {
+      debug(chalk.redBright("Authorization does not includes headers"));
       throw new Error();
     }
+
     const token = authorization.replace("Bearer ", "");
-
-    const { id } = jwt.verify(token, process.env.JWT_SECRET);
-
-    req.userId = id;
+    jwt.verify(token, process.env.JWT_SECRET);
+    debug(chalk.green("Received a valid token"));
 
     next();
   } catch {
+    debug(chalk.redBright("Invalid token"));
     const customError = new Error("Invalid token");
+
     customError.statusCode = 401;
     next(customError);
   }
