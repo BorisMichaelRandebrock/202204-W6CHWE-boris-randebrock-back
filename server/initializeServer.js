@@ -2,12 +2,6 @@ const debug = require("debug")("robots:initialize server");
 const chalk = require("chalk");
 const app = require(".");
 
-const robots = [
-  {
-    id: 1,
-  },
-];
-
 const initializeServer = (port) => {
   const server = app.listen(port, () => {
     debug(chalk.greenBright(`Server listening on ${port}`));
