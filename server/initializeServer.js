@@ -1,6 +1,7 @@
 const debug = require("debug")("robots:initialize server");
 const chalk = require("chalk");
 const app = require(".");
+const Robot = require("../db/models/Robot");
 
 const initializeServer = (port) => {
   const server = app.listen(port, () => {
@@ -15,6 +16,6 @@ const initializeServer = (port) => {
   });
 };
 
-app.get("/robots", (req, res) => res.status(200).json(robots));
+app.get("../db/models/Robot", (req, res) => res.status(200).json(Robot));
 
 module.exports = initializeServer;
