@@ -16,6 +16,6 @@ const initializeServer = (port) => {
   });
 };
 
-app.get("../db/models/Robot", (req, res) => res.status(200).json(Robot));
+// app.get("/Robot", (req, res) => res.status(200).json(robots));
 
 module.exports = initializeServer;
